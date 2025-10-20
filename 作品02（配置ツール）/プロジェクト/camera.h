@@ -1,0 +1,51 @@
+﻿//===============================================================================
+//
+//camera.h
+//
+//Author Kuramaesatoshi
+//===============================================================================
+#ifndef _CAMERA_H_
+#define _CAMERA_H_
+
+#include "main.h"
+constexpr double CAMERASPEED(1.0f);
+constexpr float CAMERA_POSV_Y(-400.0f);
+constexpr float CAMERA_POSR_Y(400.0f);
+constexpr float CAMERA_VEC_Y(20.0f);
+
+struct MouseInput {
+	float deltaX, deltaY;
+	float wheelDelta;
+	bool rightButtonHeld;
+	bool middleButtonHeld;
+	bool leftButtonHeld;
+	bool shiftHeld;
+};
+
+//カメラ
+class CCamera
+{
+public:
+	CCamera();
+	~CCamera();
+	HRESULT Init();
+	void Update();
+	void SetCamera();	//カメラの設定
+	D3DXVECTOR3& GetRot() { return m_rot; }
+private:
+	D3DXVECTOR3 m_posV;				//視点
+	D3DXVECTOR3 m_posR;				//注視点
+	D3DXVECTOR3 m_vecU;				//上方向
+	D3DXMATRIX m_mtxProjection;		//プロジェクション行列
+	D3DXMATRIX m_mtxView;			//ビュー行列
+	D3DXVECTOR3 m_TargetPosV;		//目的の注視点
+	D3DXVECTOR3 m_rot;	//向き
+	bool m_flattery;		//カメラの追従
+	int m_QuakeFlame;
+	float m_QuakeSize;
+	D3DXVECTOR3 m_AveragePlayer_pos;
+
+};
+
+
+#endif
